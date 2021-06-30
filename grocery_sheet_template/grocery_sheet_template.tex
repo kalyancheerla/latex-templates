@@ -1,0 +1,110 @@
+% !TEX program = xelatex
+\documentclass[12pt,a4paper]{article}
+
+% page setup using geometry pkg
+\usepackage[a4paper,bindingoffset=0.2in,
+            left=.5in,right=.5in,top=.5in,bottom=.5in,
+            footskip=.25in]{geometry}
+
+% font package
+\usepackage{fontspec}
+
+% adding package for indian rupee symbol
+\usepackage{tfrupee}
+\usepackage{newunicodechar}
+  \newunicodechar{₹}{\rupee}
+
+% tabularx package
+\usepackage{tabularx}
+% add this pkg just so that table breaks into next page as required
+\usepackage{ltablex}
+
+% set fonts
+% this works only with xetex
+\setmainfont{Open Sans}
+% add sub-font telugu and scale it to match the main font
+\newfontfamily\telugufont{Noto Serif Telugu}[Scale=MatchUppercase]
+
+% set new column types
+% we will use VBSS(4) = 0.3 + 1.7 + 1 + 1
+\newcolumntype{V}{>{\hsize=0.3\hsize\linewidth=\hsize}X}
+\newcolumntype{B}{>{\hsize=1.7\hsize\linewidth=\hsize}X}
+
+% set new rownumber cmd
+% to auto gen rownumbers
+\newcounter{magicrownumbers}
+\newcommand{\rownumber}{\stepcounter{magicrownumbers}\arabic{magicrownumbers}.}
+
+% Document Start
+\begin{document}
+% remove header, footer, line number etc.,
+% thispagestyle removes for a single page
+% pagestyle removes for whole document
+\pagestyle{empty}
+% center the titles and table to be in center
+\begin{center}
+% Titles
+% to restrict new font put inside {}
+{\Large\textbf{Jessi James ({\telugufont జెస్సి జేమ్స్})}}\\
+% add little vertical space
+\vspace{1mm}
+{\normalsize\emph{Cell:-} +1 724-903-0687}
+
+% stretches the columns a little bit vertically
+% in the below table
+\def\arraystretch{1.5}
+% Table
+\begin{tabularx}{\linewidth}{ |V|B|X|X| }
+  % Title of table
+  \multicolumn{4}{>{\hsize=4\hsize\linewidth=\hsize}c}
+  {
+    \large\textbf{Groceries sheet}
+  }\\ \hline
+
+  % Description of column contents
+  \textbf{S No.} & \textbf{Items} & \textbf{Quantity} & \textbf{Price (₹)} \\ \hline
+
+  % Entering the table entries (rows)
+  \rownumber & {\telugufont మినపగుండ్లు} & 99½ kg & \\ \hline
+  \rownumber & {\telugufont గోధుమలు} & 1000\textthreequarters\ kg & \\ \hline
+  \rownumber & {\telugufont కందిపప్పు} & 50\textonehalf\ kg & \\ \hline
+  \rownumber & Something, I don't remember the name & 1¼ packet & \\ \hline
+  \rownumber & & \textonequarter\ lts & \\ \hline
+  \rownumber & & & \\ \hline
+  \rownumber & & & \\ \hline
+  \rownumber & & & \\ \hline
+  \rownumber & & & \\ \hline
+  \rownumber & & & \\ \hline
+  \rownumber & & & \\ \hline
+  \rownumber & & & \\ \hline
+  \rownumber & & & \\ \hline
+  \rownumber & & & \\ \hline
+  \rownumber & & & \\ \hline
+  \rownumber & & & \\ \hline
+  \rownumber & & & \\ \hline
+  \rownumber & & & \\ \hline
+  \rownumber & & & \\ \hline
+  \rownumber & & & \\ \hline
+  \rownumber & & & \\ \hline
+  \rownumber & & & \\ \hline
+  \rownumber & & & \\ \hline
+  \rownumber & & & \\ \hline
+  \rownumber & & & \\ \hline
+  \rownumber & & & \\ \hline
+  \rownumber & & & \\ \hline
+  \rownumber & & & \\ \hline
+  \rownumber & & & \\ \hline
+  \rownumber & & & \\ \hline
+  \rownumber & & & \\ \hline
+  \rownumber & & & \\ \hline
+  \rownumber & & & \\ \hline
+  \rownumber & & & \\ \hline
+  \rownumber & & & \\ \hline
+
+% table end
+\end{tabularx}
+% center end
+\end{center}
+
+% Document End
+\end{document}
