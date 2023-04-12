@@ -1,0 +1,114 @@
+\documentclass[11pt]{article}
+
+\usepackage{geometry, amssymb}
+\usepackage[fleqn]{amsmath}
+
+\geometry{margin=1in, headsep=0.25in}
+
+\parindent 0in
+\parskip 12pt
+
+\begin{document}
+
+\title{Equations for Gradient Descent in Linear Regression}
+
+\begin{center}
+    {\LARGE \bf Equations for Gradient Descent in Linear Regression}\\
+    by\\
+    {\large Kalyan Cheerla}
+\end{center}
+
+\textbf{Input:}
+\begin{align}
+    \hat{y_i} &= \vec{w}\vec{x}+b = w_1 x_1 + w_2 x_2 +\dots+ w_n x_n + b \\
+    J(\vec{w}, b) &= \frac{1}{2n} \displaystyle\sum_{i=1}^{n} (\hat{y_i} - y_i)^2 \\
+    w_i &= w_i - \frac{\partial{J(\vec{w}, b)}}{\partial{w_i}} \\
+    b &= b - \frac{\partial{J(\vec{w}, b)}}{\partial{b}} \notag &&
+\end{align}
+
+\textbf{Solution:}
+\begin{align}
+    \intertext{Lets try to solve for $\frac{\partial{J(\vec{w}, b)}}{\partial{w_i}}$,}\notag\\[-7mm]
+    \frac{\partial{J(\vec{w}, b)}}{\partial{w_i}} & = \frac{\partial}{\partial{w_i}}\left(\frac{1}{2n} \displaystyle\sum_{i=1}^{n} (\hat{y_i} - y_i)^2 \right) \notag\\
+    & = \frac{1}{2n} \displaystyle\sum_{i=1}^{n} \left( \frac{\partial}{\partial{w_i}}(\hat{y_i} - y_i)^2 \right) \notag\\[3mm]
+    & \begin{aligned}
+        \because\ \frac{dy^2}{dx} &= 2y * \frac{dy}{dx} \text{ \&} \\
+        \frac{dk}{dx} &= 0 \text{ where k is constant.}
+    \end{aligned} \\[3mm]
+    & = \frac{1}{2n} \displaystyle\sum_{i=1}^{n} \left(2(\hat{y_i} - y_i) * \frac{\partial{(\hat{y_i} - y_i)}}{\partial{w_i}} \right) \notag\\
+    & = \frac{1}{n} \displaystyle\sum_{i=1}^{n} \left((\hat{y_i} - y_i) * \frac{\partial{\hat{y_i}}}{\partial{w_i}} \right) \notag\\
+    \intertext{Now substitute the eq (1),}\notag\\[-7mm]
+    & = \frac{1}{n} \displaystyle\sum_{i=1}^{n} \left((\hat{y_i} - y_i) * \frac{\partial{(\vec{w}\vec{x}+b)}}{\partial{w_i}} \right) \notag\\
+    & = \frac{1}{n} \displaystyle\sum_{i=1}^{n} \left((\hat{y_i} - y_i) * \frac{\partial{(w_1 x_1+w_2 x_2+\dots+w_n x_n+b)}}{\partial{w_i}} \right) \notag\\
+    \intertext{Based on the eq (4),}\notag\\[-7mm]
+    & = \frac{1}{n} \displaystyle\sum_{i=1}^{n} \left((\hat{y_i} - y_i) * \left(0+0+\dots+\frac{\partial{(w_i x_n)}}{\partial{w_i}}+\dots+0+0\right) \right) \notag\\
+    & = \frac{1}{n} \displaystyle\sum_{i=1}^{n} [(\hat{y_i} - y_i) * x_i ] \notag\\
+    \intertext{Finally the equations are,}\notag\\[-7mm]
+    w_i & = w_i - \frac{1}{n} \displaystyle\sum_{i=1}^{n} [(\hat{y_i} - y_i) * x_i ] \\
+    & = w_i - \frac{1}{n} \displaystyle\sum_{i=1}^{n} [(\vec{w}\vec{x}+b - y_i) * x_i ] \notag\\
+    b & = b - \frac{1}{n} \displaystyle\sum_{i=1}^{n} [(\hat{y_i} - y_i) * 1 ] \notag &&
+\end{align}
+
+\newpage
+
+\begin{center}
+    {\LARGE \bf Equations for Gradient Descent in Logistic Regression}\\
+    by\\
+    {\large Kalyan Cheerla}
+\end{center}
+
+\textbf{Input:}
+\begin{align}
+    \setcounter{equation}{0}
+    \hat{y_i} &= \frac{1}{1+e^{-z}} = \frac{1}{1+e^{-(\vec{w}\vec{x}+b)}} \\
+    z &= \vec{w}\vec{x}+b = w_1 x_1 + w_2 x_2 +\dots+ w_n x_n + b \notag\\
+    J(\vec{w}, b) &= -\frac{1}{n} \displaystyle\sum_{i=1}^{n} \left[ y_i \log{(\hat{y_i})} + (1 - y_i) \log{(1 - \hat{y_i})} \right] \\
+    w_i &= w_i - \frac{\partial{J(\vec{w}, b)}}{\partial{w_i}} \\
+    b &= b - \frac{\partial{J(\vec{w}, b)}}{\partial{b}} \notag &&
+\end{align}
+
+\textbf{Solution:}
+\begin{align}
+    \intertext{Lets try to solve for $\frac{\partial{J(\vec{w}, b)}}{\partial{w_i}}$,}\notag\\[-7mm]
+    \frac{\partial{J(\vec{w}, b)}}{\partial{w_i}} & = \frac{\partial}{\partial{w_i}}\left( -\frac{1}{n} \displaystyle\sum_{i=1}^{n} [ y_i \log{(\hat{y_i})} + (1 - y_i) \log{(1 - \hat{y_i})} ] \right) \notag\\
+    & = -\frac{1}{n} \displaystyle\sum_{i=1}^{n} \left( \frac{\partial}{\partial{w_i}}[ y_i \log{(\hat{y_i})} + (1 - y_i) \log{(1 - \hat{y_i})} ] \right) \notag\\
+    & = -\frac{1}{n} \displaystyle\sum_{i=1}^{n} \left( y_i \frac{\partial}{\partial{w_i}}(\log{(\hat{y_i})}) + (1 - y_i) \frac{\partial}{\partial{w_i}}(\log{(1 - \hat{y_i})}) \right) \notag\\[3mm]
+    & \begin{aligned}
+        \because\ \frac{d(\log_a y)}{dx} &= \frac{1}{y \log_e a} * \frac{dy}{dx} \text{ \&} \\
+        \frac{dk}{dx} &= 0 \text{ where k is constant.}
+    \end{aligned} \\[3mm]
+    \intertext{Here if we consider logarithmic with base e,}\notag\\[-7mm]
+    & = -\frac{1}{n} \displaystyle\sum_{i=1}^{n} \left( \frac{y_i}{\hat{y_i}} * \frac{\partial{\hat{y_i}}}{\partial{w_i}} + \frac{1 - y_i}{1 - \hat{y_i}} * \frac{\partial{(1 - \hat{y_i})}}{\partial{w_i}} \right) \notag\\
+    & = -\frac{1}{n} \displaystyle\sum_{i=1}^{n} \left( \frac{y_i}{\hat{y_i}} - \frac{1 - y_i}{1 - \hat{y_i}} \right) * \frac{\partial{\hat{y_i}}}{\partial{w_i}} \notag\\
+    & = -\frac{1}{n} \displaystyle\sum_{i=1}^{n} \left( \frac{y_i - y_i \hat{y_i} - \hat{y_i} + y_i \hat{y_i}}{\hat{y_i}(1 - \hat{y_i})} \right) * \frac{\partial{\hat{y_i}}}{\partial{w_i}} \notag\\
+    & = \frac{1}{n} \displaystyle\sum_{i=1}^{n} \left( \frac{\hat{y_i} - y_i}{\hat{y_i}(1 - \hat{y_i})} \right) * \frac{\partial{\hat{y_i}}}{\partial{w_i}} \\
+    \intertext{Lets try to reduce $\frac{\partial{\hat{y_i}}}{\partial{w_i}}$ by substituting eq (1),}\notag\\[-7mm]
+    \frac{\partial{\hat{y_i}}}{\partial{w_i}} & = \frac{\partial}{\partial{w_i}} \left( \frac{1}{1+e^{-z}} \right) \notag\\
+    & = \frac{\partial}{\partial{w_i}} \left( 1+e^{-z} \right)^{-1} \notag\\[3mm]
+    & \begin{aligned}
+        \because\ \frac{d(y^k)}{dx} &= k * y^{(k-1)} * \frac{dy}{dx} \text{ \&} \\
+        \frac{d(e^y)}{dx} &= e^y * \frac{dy}{dx}
+    \end{aligned} \\[3mm]
+    & = -1 * (1+e^{-z})^{-2} * \frac{\partial}{\partial{w_i}} \left( 1+e^{-z} \right) \notag\\
+    & = -\frac{1}{(1+e^{-z})^2} * \left( 0+\frac{\partial{(e^{-z})}}{\partial{w_i}} \right) \notag\\
+    & = -\frac{1}{(1+e^{-z})^2} * e^{-z} * \frac{\partial{(-z)}}{\partial{w_i}} \notag\\
+    & = \frac{e^{-z}}{(1+e^{-z})^2} * \frac{\partial{z}}{\partial{w_i}} \notag\\
+    & = \frac{e^{-z}}{(1+e^{-z})^2} * \frac{\partial{(w_1 x_1 + w_2 x_2 +\dots+ w_i x_i +\dots+ w_n x_n)}}{\partial{w_i}} \notag\\
+    & = \frac{e^{-z}}{(1+e^{-z})^2} * x_i \notag\\
+    \intertext{Lets try to reduce $\hat{y_i}(1 - \hat{y_i})$ by substituting eq (1),}\notag\\[-7mm]
+    \hat{y_i}(1 - \hat{y_i}) & = \frac{1}{1+e^{-z}}\left(1 - \frac{1}{1+e^{-z}}\right) \notag\\
+    & = \frac{1}{1+e^{-z}}\left(\frac{1 + e^{-z} - 1}{1+e^{-z}}\right) \notag\\
+    & = \frac{1}{1+e^{-z}}\left(\frac{e^{-z}}{1+e^{-z}}\right) \notag\\
+    & = \frac{e^{-z}}{(1+e^{-z})^2} \notag\\
+    \frac{1}{\hat{y_i}(1 - \hat{y_i})} & = \frac{(1+e^{-z})^2}{e^{-z}} \notag\\
+    \intertext{Now if we continue on our eq (5),}\notag\\[-7mm]
+    \frac{\partial{J(\vec{w}, b)}}{\partial{w_i}} & = \frac{1}{n} \displaystyle\sum_{i=1}^{n} \left( \frac{\hat{y_i} - y_i}{\hat{y_i}(1 - \hat{y_i})} \right) * \frac{\partial{\hat{y_i}}}{\partial{w_i}} \notag\\
+    & = \frac{1}{n} \displaystyle\sum_{i=1}^{n} (\hat{y_i} - y_i) * \left( \frac{(1+e^{-z})^2}{e^{-z}} * \frac{x_i e^{-z}}{(1+e^{-z})^2} \right) \notag\\
+    & = \frac{1}{n} \displaystyle\sum_{i=1}^{n} [(\hat{y_i} - y_i) * x_i ] \notag\\
+    \intertext{Finally the equations are,}\notag\\[-7mm]
+    w_i & = w_i - \frac{1}{n} \displaystyle\sum_{i=1}^{n} [(\hat{y_i} - y_i) * x_i ] \\
+    & = w_i - \frac{1}{n} \displaystyle\sum_{i=1}^{n} [(\vec{w}\vec{x}+b - y_i) * x_i ] \notag\\
+    b & = b - \frac{1}{n} \displaystyle\sum_{i=1}^{n} [(\hat{y_i} - y_i) * 1 ] \notag &&
+\end{align}
+
+\end{document}
